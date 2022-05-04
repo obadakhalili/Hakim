@@ -1,0 +1,20 @@
+version: "3.1"
+
+intents:
+  - greet
+  - goodbye
+  - symptoms_report
+  - affirm
+  - deny
+  - dont_know
+  - chitchat
+  - restart
+  - bot_challenge
+
+responses:
+  utter_out_of_scope:
+    - text: "Sorry, this is out of scope for this bot."
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
