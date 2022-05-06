@@ -2,7 +2,7 @@ version: '3.1'
 
 nlu:
   - intent: deny
-    examples:
+    examples: |
       - لا
       - اتوقع لا
       - لا اعتقد
@@ -64,7 +64,7 @@ nlu:
       - هيك مش صح
 
   - intent: affirm
-    examples:
+    examples: |
       - صحيح
       - هذا صحيح
       - صح
@@ -153,7 +153,7 @@ nlu:
       - ما تقوله انت صحيح
 
   - intent: dont_know
-    examples:
+    examples: |
       - لا اعرف
       - لست اعرف
       - كيف اعرف
@@ -215,7 +215,7 @@ nlu:
       - ما الموضوع
       
   - intent: symptoms_report
-    examples:
+    examples: |
       - اعاني من الامساك الشديد
       - أشعر بألم في اعصاب يدي ورجلي وعندي إمساك
       - اعاني احيانا من الم في القولون
