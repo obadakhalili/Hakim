@@ -1,4 +1,4 @@
-version: '3.1'
+version: "3.1"
 
 nlu:
   - intent: deny
@@ -213,8 +213,8 @@ nlu:
       - ماذا تعني بهذه الرسالة
       - لم افهم الموضوع
       - ما الموضوع
-      
-  - intent: symptoms_report
+
+  - intent: observations_report
     examples: |
       - اعاني من الامساك الشديد
       - أشعر بألم في اعصاب يدي ورجلي وعندي إمساك

@@ -3,7 +3,10 @@ version: "3.1"
 intents:
   - greet
   - goodbye
-  - symptoms_report
+  - symptoms_of_condition
+  - sex_report
+  - age_report
+  - observations_report
   - affirm
   - deny
   - dont_know
@@ -11,9 +14,48 @@ intents:
   - restart
   - bot_challenge
 
-responses:
-  utter_out_of_scope:
-    - text: "Sorry, this is out of scope for this bot."
+entities:
+  - sex
+  - age
+
+slots:
+  sex:
+    type: categorical
+    values:
+      - male
+      - female
+    influence_converstaion: false
+    mappings:
+      - type: from_entity
+        entity: sex
+
+  # TODO: support age in month unit
+  age:
+    type: float
+    max_value: 130.0
+    influence_converstaion: false
+    mappings:
+      - type: from_entity
+        entity: age
+
+
+  third_person_questions_style_enabled:
+    type: bool
+    influence_converstaion: false
+    mappings:
+      - type: from_entity
+
+  # observations are symptoms (s) and risk factors (p)
+  # risk factors can be chronic conditions (e.g. diabetes), lifestyle habits (e.g. smoking),
+  # geographical locations (e.g. South America), or events (e.g. a head injury or insect bite)
+  observations:
+    type: list # [{ id: "(s|p)_\d+", state: "present" | "absent" | "unknown", source?: "initial" | "suggest" | "red_flags" }]
+    # `initial` means that the corresponding observation was present in the first message
+    # `suggest` means that the corresponding observation was present in the message replying to observations suggestions by the bot
+    # `red_flags` are similar to `suggest` but the obsevervation is marked as red flag (potentially life-threatening)
+    influence_converstaion: true
+    mappings:
+      - type: custom
 
 session_config:
   session_expiration_time: 60
