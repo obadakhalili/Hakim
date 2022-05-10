@@ -309,7 +309,29 @@ nlu:
       - انا [فتى]{"entity": "sex", "value": "male"}
       - انا [ختيار]{"entity": "sex", "value": "male"}
       - انا [عجوز]{"entity": "sex", "value": "male"}
-      
+      - [زوجتي]{"entity": "sex", "value": "female"}
+      - [عمتي]{"entity": "sex", "value": "female"}
+      - [خالتي]{"entity": "sex", "value": "female"}
+      - [زوجة]{"entity": "sex", "value": "female"}
+      - [بنتي]{"entity": "sex", "value": "female"}
+      - [طفلتي]{"entity": "sex", "value": "female"}
+      - [ابنتي]{"entity": "sex", "value": "female"}
+      - [والدتي]{"entity": "sex", "value": "female"}
+      - [زوجي]{"entity": "sex", "value": "male"}
+      - [عمي]{"entity": "sex", "value": "male"}
+      - [خالي]{"entity": "sex", "value": "male"}
+      - [ولدي]{"entity": "sex", "value": "male"}
+      - [ابني]{"entity": "sex", "value": "male"}
+      - [طفلي]{"entity": "sex", "value": "male"}
+      - [والدي]{"entity": "sex", "value": "male"}
+      - [عجوز]{"entity": "sex", "value": "male"}
+      - [امي]{"entity": "sex", "value": "female"}
+      - [والدتي]{"entity": "sex", "value": "female"}
+      - [ماما]{"entity": "sex", "value": "female"}
+      - [ابي]{"entity": "sex", "value": "male"}
+      - [ابوي]{"entity": "sex", "value": "male"}
+      - [بابا]{"entity": "sex", "value": "male"}
+      - [والدي]{"entity": "sex", "value": "male"}
 
   - intent: observations_report
     examples: |
