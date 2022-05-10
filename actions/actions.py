@@ -38,7 +38,7 @@ class ActionSetupInterview(Action):
                 # TODO: translate from en to ar
                 observations_msg = tracker.latest_message["text"]
 
-                # TODO: consider parsing the message and validating it has observations mentions before saving it
+                # NOTE: consider parsing the message and validating it has observations mentions before saving it
 
                 if len(observations_msg) > 2048:
                     dispatcher.utter_message(response="utter_observations_too_long")
@@ -87,7 +87,7 @@ class ActionSetupInterview(Action):
                 return taken_events
 
             if not was_obvious:
-                # TODO: consider validating the detected observations with the user before going any further
+                # NOTE: consider validating the detected observations with the user before going any further
                 pass
 
             if len(collected_observations) == 0:
@@ -100,10 +100,10 @@ class ActionSetupInterview(Action):
                     ],
                 }
 
-                # TODO: unmock suggestion and use real suggestions
                 observations_suggestions = []
 
                 for suggest_method, source in [
+                    # NOTE: consider comaenting out the following suggestion methods
                     ("symptoms", "suggest"),
                     ("demographic_risk_factors", "suggest"),
                     ("evidence_based_risk_factors", "suggest"),
@@ -177,6 +177,7 @@ class ActionDiagnose(Action):
                 collected_observations.append(observation)
 
             if len(observations_questions) == 0:
+                # TODO: use interview-id slot
                 diagnosis = infermedica_api.diagnosis(
                     {
                         "sex": tracker.get_slot("sex"),
