@@ -1,62 +1,72 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - greet
-  - goodbye
-  - symptoms_of_condition
-  - sex_report
-  - age_report
-  - observations_report
-  - affirm
-  - deny
-  - dont_know
-  - chitchat
-  - restart
-  - bot_challenge
-
+- affirm
+- age_report
+- bot_challenge
+- chitchat
+- deny
+- dont_know
+- goodbye
+- greet
+- observations_report
+- restart
+- sex_report
+- symptoms_inquiry
 entities:
-  - sex
-  - age
-
+- sex
+- age
 slots:
   sex:
-    type: categorical
-    values:
-      - male
-      - female
-    influence_converstaion: false
+    type: text
+    influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: sex
-
-  # TODO: support age in month unit
+    - type: from_entity
+      entity: sex
   age:
     type: float
-    max_value: 130.0
-    influence_converstaion: false
+    influence_conversation: true
     mappings:
-      - type: from_entity
-        entity: age
-
-
+    - type: from_entity
+      entity: age
   third_person_questions_style_enabled:
     type: bool
-    influence_converstaion: false
+    initial_value: false
+    influence_conversation: false
     mappings:
-      - type: from_entity
-
-  # observations are symptoms (s) and risk factors (p)
-  # risk factors can be chronic conditions (e.g. diabetes), lifestyle habits (e.g. smoking),
-  # geographical locations (e.g. South America), or events (e.g. a head injury or insect bite)
-  observations:
-    type: list # [{ id: "(s|p)_\d+", state: "present" | "absent" | "unknown", source?: "initial" | "suggest" | "red_flags" }]
-    # `initial` means that the corresponding observation was present in the first message
-    # `suggest` means that the corresponding observation was present in the message replying to observations suggestions by the bot
-    # `red_flags` are similar to `suggest` but the obsevervation is marked as red flag (potentially life-threatening)
-    influence_converstaion: true
+    - type: custom
+  collected_observations:
+    type: list
+    initial_value: []
+    influence_conversation: true
     mappings:
-      - type: custom
-
+    - type: custom
+  last_observations_report_msg:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+  observations_questions:
+    type: list
+    initial_value: []
+    influence_conversation: true
+    mappings:
+    - type: custom
+actions:
+- action_diagnose
+- action_setup_interview
+responses:
+  utter_observations_too_long:
+  - text: utter_observations_too_long
+  utter_specify_sex:
+  - text: utter_specify_sex
+  utter_specify_age:
+  - text: utter_specify_age
+  utter_no_observations:
+  - text: utter_no_observations
+  utter_pediatrics_not_supported:
+  - text: utter_pediatrics_not_supported
+  utter_age_too_high:
+  - text: utter_age_too_high
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
