@@ -313,6 +313,7 @@ nlu:
       - [عمتي]{"entity": "sex", "value": "female"}
       - [خالتي]{"entity": "sex", "value": "female"}
       - [زوجة]{"entity": "sex", "value": "female"}
+      - [مرتي]{"entity": "sex", "value": "female"}
       - [بنتي]{"entity": "sex", "value": "female"}
       - [طفلتي]{"entity": "sex", "value": "female"}
       - [ابنتي]{"entity": "sex", "value": "female"}
