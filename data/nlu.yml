@@ -285,6 +285,31 @@ nlu:
       - سيدي عمره [68](age) سنه
       - ستي عمرها [88](age) عام
 
+  - intent: sex_report
+    examples: |
+      - انا [انثى]{"entity": "sex", "value": "female"}
+      - انا [بنت]{"entity": "sex", "value": "female"}
+      - أنا [صبية]{"entity": "sex", "value": "female"}
+      - انا [حجة]{"entity": "sex", "value": "female"}
+      - انا [فتاة]{"entity": "sex", "value": "female"}
+      - انا [فتاه]{"entity": "sex", "value": "female"}
+      - انا [بنوتة]{"entity": "sex", "value": "female"}
+      - انا [صبيه]{"entity": "sex", "value": "female"}
+      - انا [امراة]{"entity": "sex", "value": "female"}
+      - انا [مرأة]{"entity": "sex", "value": "female"}
+      - انا [مرأة]{"entity": "sex", "value": "female"}
+      - انا [مرأة]{"entity": "sex", "value": "female"}
+      - جنسي هو [انثى]{"entity": "sex", "value": "female"}
+      - انا [ذكر]{"entity": "sex", "value": "male"}
+      - انا [ولد]{"entity": "sex", "value": "male"}
+      - أنا [شب]{"entity": "sex", "value": "male"}
+      - انا [حج]{"entity": "sex", "value": "male"}
+      - انا [زلمة]{"entity": "sex", "value": "male"}
+      - انا [رجل]{"entity": "sex", "value": "male"}
+      - انا [فتى]{"entity": "sex", "value": "male"}
+      - انا [ختيار]{"entity": "sex", "value": "male"}
+      - انا [عجوز]{"entity": "sex", "value": "male"}
+
   - intent: observations_report
     examples: |
       - اعاني من الامساك الشديد
