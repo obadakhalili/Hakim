@@ -1,4 +1,4 @@
-version: "3.1"
+version: '3.1'
 nlu:
   - intent: deny
     examples: |
@@ -528,3 +528,25 @@ nlu:
       - [female](sex). age [23](age). observations are: cough and severe fever
       - [female](sex). age is [23](age). observations are: cough and fever
       - [male](sex) of age [30](age). observations are fever, cough, and loss of taste
+  - intent: greet
+    examples: |
+      - مرحبا
+      - اهلا
+      - كيفك
+      - مين معي
+      - هلا
+      - السلام عليكم
+      - السلام عليكم ورحمة الله وبركاته
+      - مساء الخير
+      - مساء النور
+      - تحية
+      - الو
+      - مراحب
+      - ممكن خدمة
+      - بدي مساعدة
+      - يا اهلا و سهلا
+      - تحياتي
+      - اهلا بك
+      - صباح الخير
+      - صباح النور
+      - حياك الله
