@@ -1,20 +1,72 @@
-version: "3.1"
-
+version: '3.1'
 intents:
-  - greet
-  - goodbye
-  - symptoms_report
-  - affirm
-  - deny
-  - dont_know
-  - chitchat
-  - restart
-  - bot_challenge
-
+- affirm
+- age_report
+- bot_challenge
+- chitchat
+- deny
+- dont_know
+- goodbye
+- greet
+- observations_report
+- restart
+- sex_report
+- symptoms_inquiry
+entities:
+- sex
+- age
+slots:
+  sex:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: sex
+  age:
+    type: float
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: age
+  third_person_questions_style_enabled:
+    type: bool
+    initial_value: false
+    influence_conversation: false
+    mappings:
+    - type: custom
+  collected_observations:
+    type: list
+    initial_value: []
+    influence_conversation: true
+    mappings:
+    - type: custom
+  last_observations_report_msg:
+    type: text
+    influence_conversation: false
+    mappings:
+    - type: custom
+  observations_questions:
+    type: list
+    initial_value: []
+    influence_conversation: true
+    mappings:
+    - type: custom
+actions:
+- action_diagnose
+- action_setup_interview
 responses:
-  utter_out_of_scope:
-    - text: "Sorry, this is out of scope for this bot."
-
+  utter_observations_too_long:
+  - text: utter_observations_too_long
+  utter_specify_sex:
+  - text: utter_specify_sex
+  utter_specify_age:
+  - text: utter_specify_age
+  utter_no_observations:
+  - text: utter_no_observations
+  utter_pediatrics_not_supported:
+  - text: utter_pediatrics_not_supported
+  utter_age_too_high:
+  - text: utter_age_too_high
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
