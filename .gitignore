@@ -126,3 +126,4 @@ secret/
 run_rasa*
 
 .env
+google_service_account_credentials.json

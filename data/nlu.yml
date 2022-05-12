@@ -517,17 +517,6 @@ nlu:
       - حراره عاليه في البطن والاكتاف مع الم اسفل البطن من الجهه اليسرى 
       - الم البطن استبراد وما هوه العلاج
       - عندي مشكله في الهضم
-      - my observations are: stomach pain, headache, and a fever.
-      - my observations are: fever, cough, and loss of taste
-      - my observations are: fever and loss of taste
-      - my observations are: fever and cough
-      - my observations are: lack of sleep
-      - [male](sex). my observations are: stomach pain
-      - my observations are: severe fever
-      - my age is [31](age). my observations are: sore throat and headache
-      - [female](sex). age [23](age). observations are: cough and severe fever
-      - [female](sex). age is [23](age). observations are: cough and fever
-      - [male](sex) of age [30](age). observations are fever, cough, and loss of taste
   - intent: greet
     examples: |
       - مرحبا
