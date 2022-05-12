@@ -1,4 +1,6 @@
 from rasa_sdk import Action, events
+from google.cloud import translate
+from google.oauth2 import service_account
 import infermedica_api as infermedica
 
 from actions import config
@@ -7,6 +9,12 @@ infermedica_api = infermedica.BasicAPIv3Connector(
     app_id=config.infermedica_app_id,
     app_key=config.infermedica_app_key,
     dev_mode=config.env == "dev",
+)
+
+gtranslation_api = translate.TranslationServiceClient(
+    credentials=service_account.Credentials.from_service_account_file(
+        filename="./google_service_account_credentials.json"
+    )
 )
 
 
@@ -35,8 +43,16 @@ class ActionSetupInterview(Action):
             observations_msg = None
 
             if tracker.get_intent_of_latest_message() == "observations_report":
-                # TODO: translate from en to ar
                 observations_msg = tracker.latest_message["text"]
+
+                translation_response = gtranslation_api.translate_text(
+                    parent=f"projects/{config.gcloud_project_id}",
+                    contents=[observations_msg],
+                    source_language_code="ar",
+                    target_language_code="en",
+                )
+
+                observations_msg = translation_response.translations[0].translated_text
 
                 # NOTE: consider parsing the message and validating it has observations mentions before saving it
 
@@ -225,7 +241,17 @@ class ActionDiagnose(Action):
 
                 observation_question["text"] = observation_details["question"]
 
-            # TODO: translate to ar
+            translation_response = gtranslation_api.translate_text(
+                parent=f"projects/{config.gcloud_project_id}",
+                contents=[observation_question["text"]],
+                source_language_code="en",
+                target_language_code="ar",
+            )
+
+            observation_question["text"] = translation_response.translations[
+                0
+            ].translated_text
+
             dispatcher.utter_message(observation_question["text"])
 
             return taken_events
