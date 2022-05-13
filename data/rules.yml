@@ -1,1 +1,22 @@
 version: "3.1"
+
+rules:
+  - rule: greet
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+
+  - rule: goodbye
+    steps:
+    - intent: goodbye
+    - action: utter_goodbye
+  
+  - rule: symptoms_inquiry out-of-scope
+    steps:
+    - intent: symptoms_inquiry
+    - action: utter_symptoms_inquiry_out_of_scope
+  
+  - rule: fallback message
+    steps:
+    - intent: nlu_fallback
+    - action: utter_fallback_message

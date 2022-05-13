@@ -17,16 +17,6 @@ gtranslation_api = translate.TranslationServiceClient(
     )
 )
 
-
-class ActionSessionStart(Action):
-    def name(self):
-        return "action_session_start"
-
-    def run(self, dispatcher, tracker, domain):
-        # TODO: set interview-id slot
-        return []
-
-
 class ActionSetupInterview(Action):
     def name(self):
         return "action_setup_interview"
@@ -67,7 +57,7 @@ class ActionSetupInterview(Action):
                 observations_msg = tracker.get_slot("last_observations_report_msg")
 
             sex = tracker.get_slot("sex")
-            if not sex:
+            if sex not in ["male", "female"]:
                 dispatcher.utter_message(response="utter_specify_sex")
                 return taken_events
 
@@ -94,11 +84,11 @@ class ActionSetupInterview(Action):
                     "context": [obs["id"] for obs in collected_observations],
                 }
             )
-            observations_msg, was_obvious = (
+            msg_observations, was_obvious = (
                 msg_parsing[attr] for attr in ["mentions", "obvious"]
             )
 
-            if len(observations_msg) == 0:
+            if len(msg_observations) == 0:
                 dispatcher.utter_message(response="utter_no_observations")
                 return taken_events
 
@@ -112,7 +102,7 @@ class ActionSetupInterview(Action):
                     "age": {"value": age},
                     "evidence": [
                         {"id": obs["id"], "choice_id": obs["choice_id"]}
-                        for obs in observations_msg
+                        for obs in msg_observations
                     ],
                 }
 
@@ -143,7 +133,7 @@ class ActionSetupInterview(Action):
 
             collected_observations = collected_observations + [
                 {"id": obs["id"], "state": obs["choice_id"], "source": "initial"}
-                for obs in observations_msg
+                for obs in msg_observations
             ]
 
             taken_events.append(

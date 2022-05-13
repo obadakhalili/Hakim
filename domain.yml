@@ -2,8 +2,6 @@ version: '3.1'
 intents:
 - affirm
 - age_report
-- bot_challenge
-- chitchat
 - deny
 - dont_know
 - goodbye
@@ -13,8 +11,8 @@ intents:
 - sex_report
 - symptoms_inquiry
 entities:
-- sex
 - age
+- sex
 slots:
   sex:
     type: text
@@ -28,12 +26,6 @@ slots:
     mappings:
     - type: from_entity
       entity: age
-  third_person_questions_style_enabled:
-    type: bool
-    initial_value: false
-    influence_conversation: false
-    mappings:
-    - type: custom
   collected_observations:
     type: list
     initial_value: []
@@ -55,6 +47,12 @@ actions:
 - action_diagnose
 - action_setup_interview
 responses:
+  utter_confirm_restart:
+  - text: utter_confirm_restart
+  utter_greet_back:
+  - text: utter_greet_back
+  utter_goodbye:
+  - text: utter_goodbye
   utter_observations_too_long:
   - text: utter_observations_too_long
   utter_specify_sex:
@@ -67,6 +65,12 @@ responses:
   - text: utter_pediatrics_not_supported
   utter_age_too_high:
   - text: utter_age_too_high
+  utter_symptoms_inquiry_out_of_scope:
+  - text: utter_symptoms_inquiry_out_of_scope
+  utter_fallback_message:
+  - text: utter_fallback_message
+  utter_default:
+  - text: utter_default
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
