@@ -1,76 +1,99 @@
 version: '3.1'
 intents:
-- affirm
-- age_report
-- deny
-- dont_know
-- goodbye
-- greet
-- observations_report
-- restart
-- sex_report
-- symptoms_inquiry
+  - affirm
+  - age_report
+  - deny
+  - dont_know
+  - goodbye
+  - greet
+  - observations_report
+  - restart
+  - sex_report
+  - symptoms_inquiry
 entities:
-- age
-- sex
+  - age
+  - sex
 slots:
   sex:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: sex
+      - type: from_entity
+        entity: sex
   age:
     type: float
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: age
+      - type: from_entity
+        entity: age
   collected_observations:
     type: list
     initial_value: []
     influence_conversation: true
     mappings:
-    - type: custom
+      - type: custom
   last_observations_report_msg:
     type: text
     influence_conversation: false
     mappings:
-    - type: custom
+      - type: custom
   observations_questions:
     type: list
     initial_value: []
     influence_conversation: true
     mappings:
-    - type: custom
+      - type: custom
 actions:
-- action_diagnose
-- action_setup_interview
+  - action_diagnose
+  - action_setup_interview
 responses:
   utter_confirm_restart:
-  - text: utter_confirm_restart
+    - text: هل انت متأكد انك تريد الاعادة من البداية؟
+    - text: الرجاء التأكيد انك تريد ان تعيد من البداية؟
+    - text: هل تريد ان تعيد من البداية؟
   utter_greet_back:
-  - text: utter_greet_back
+    - text: اهلا وسهلا بك, أرجو انت تكون بخير, اسمي حكيم.
+    - text: اهلا ويا مرحبا بك, انا اسمي حكيم هل هناك ما اساعدك به؟
+    - text: وعليكم السلام ورحمة الله وبركاته,انا اسمي حكيم بما يمكن ان اساعدك؟
   utter_goodbye:
-  - text: utter_goodbye
+    - text: الى اللقاء, آمل ان تكون قد استفدت من الحديث معي.
+    - text: وداعا واتمنى ان اكون قد افدتك بمعرفتي.
+    - text: تشرفت بلقائك, فلتأتي الي كل ما احتجت ان تسال سؤال.
   utter_observations_too_long:
-  - text: utter_observations_too_long
+    - text: الاعراض التي تم ادخالها كثيرة جدا الرجاء ارسال عرض الى 3 اعراض في كل رسالة.
+    - text: الاعراض التي تم ادخالها اكثر من المحدد, الرجاء ادخال اعراض اقل.
+    - text: هناك مشكلة في تحليل عدد الاعراض, الرجاء ادخال اعراض اقل.
   utter_specify_sex:
-  - text: utter_specify_sex
+    - text: الرجاء تحديد الجنس.
+    - text: أرجو منك ان تحدد جنسك.
+    - text: يجب عليك ان تحدد جنسك.
   utter_specify_age:
-  - text: utter_specify_age
+    - text: الرجاء تحديد العمر.
+    - text: يجب عليك ان تحدد عمرك.
+    - text: مطلوب منك تحديد العمر.
   utter_no_observations:
-  - text: utter_no_observations
+    - text: لا يوجد اي اعراض في الرسالة الرجاء اعادة صياغ السؤال.
+    - text: لم يتم تحديد اي اعراض في الرسالة, الرجاء التأكد من محتوى الرسالة.
+    - text: هذه الرسالة لا تحتوي على اي اعراض الرجاء اعادة ارسالة الرسالة والتأكد من الاعراض.
   utter_pediatrics_not_supported:
-  - text: utter_pediatrics_not_supported
+    - text: اتأسف منك لا يوجد اي معلومات عن مرض بهذه الاعراض ضمن قاعدة البيانات.
+    - text: لا يوجد اي دعم او بيانات تتعلق بهذا المرض.
   utter_age_too_high:
-  - text: utter_age_too_high
+    - text: عمرك اكبر من العمر المحدد الرجاء التأكد من العمر المدخل.
+    - text: العمر المدخل اكبر من العمر المحدد.
+    - text: العمر المدخل غير منطقي الرجاء التأكد من العمر.
   utter_symptoms_inquiry_out_of_scope:
-  - text: utter_symptoms_inquiry_out_of_scope
+    - text: الاعراض التي تم سؤال عنها خارج نطاق معرفتي.
+    - text: هذه الاعراض خارج نطاق المعرفة.
   utter_fallback_message:
-  - text: utter_fallback_message
+    - text: المعذرة لا يمكنني فهم سؤالك, هل بأمكانك اعادة صياغ السؤال.
+    - text: اعتذر لكنني لا افهم ما تحاول السؤال عنه.
+    - text: اظن انني لا افهم ما تعنيه بسؤالك.
   utter_default:
-  - text: utter_default
+    - text: سؤالك غير مفهوم هل بأمكانك اعادة صياغ السؤال.
+    - text: هذا السؤال خارج نطاق معرفتي, هل انت متأكد من صياغة السؤال.
+    - text: انا اسف لكن اظن انني لم افهم ما تسال عنه, هل بامكانك ان تعيد صياغة السؤال بطريقة اخرى.
+
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
