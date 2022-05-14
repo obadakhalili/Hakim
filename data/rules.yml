@@ -1,1 +1,12 @@
 version: "3.1"
+
+rules:
+  - rule: symptoms_inquiry out-of-scope
+    steps:
+    - intent: symptoms_inquiry
+    - action: utter_symptoms_inquiry_out_of_scope
+  
+  - rule: fallback message
+    steps:
+    - intent: nlu_fallback
+    - action: utter_fallback_message

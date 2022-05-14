@@ -1,72 +1,134 @@
 version: "3.1"
 
 stories:
-  - story: interactive_story
+  - story: specified sex and age before action_setup_interview
     steps:
+    - intent: greet
+    - action: utter_greet_back
     - intent: observations_report
       entities:
-      - sex: female
-      - age: '23'
+      - sex: male
+      - age: '15'
     - slot_was_set:
-      - sex: female
+      - sex: male
     - slot_was_set:
-      - age: '23'
+      - age: '15'
     - action: action_setup_interview
     - slot_was_set:
-      - last_observations_report_msg: 'female. age is 23. observations are: cough and fever'
+      - last_observations_report_msg: انا ذكر بعمر ال 15, واعاني من سعال وحمه شديدتان
     - slot_was_set:
       - observations_questions:
-        - id: s_88
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
           source: suggest
     - slot_was_set:
       - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
         - id: s_102
           state: present
           source: initial
-        - id: s_98
-          state: present
-          source: initial
     - action: action_diagnose
-
-  - story: interactive_story
-    steps:
-    - intent: observations_report
-      entities:
-      - sex: male
-    - slot_was_set:
-      - sex: male
-    - action: action_setup_interview
-    - slot_was_set:
-      - last_observations_report_msg: 'male. my observations are: stomach pain'
-    - intent: age_report
-      entities:
-      - age: '23'
-    - slot_was_set:
-      - age: '23'
-    - action: action_setup_interview
     - slot_was_set:
       - observations_questions:
-        - id: s_88
+        - id: s_81
+          source: suggest
+          text: a question from suggestions
+        - id: s_2100
+          source: suggest
+        - id: s_1142
           source: suggest
     - slot_was_set:
       - collected_observations:
-        - id: s_13
+        - id: s_100
           state: present
           source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: affirm
     - action: action_diagnose
-
-  - story: interactive_story
-    steps:
-    - intent: observations_report
-    - action: action_setup_interview
     - slot_was_set:
-      - last_observations_report_msg: 'my observations are: severe fever'
-    - intent: sex_report
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: a question from suggestions
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+    - intent: dont_know
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+    - intent: goodbye
+    - action: utter_goodbye
+
+  - story: specified only sex before action_setup_interview
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+    - intent: observations_report
       entities:
       - sex: male
     - slot_was_set:
       - sex: male
     - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: درجة حرارتي مرتفعه جدا. انا ذكر
     - intent: age_report
       entities:
       - age: '21'
@@ -75,17 +137,196 @@ stories:
     - action: action_setup_interview
     - slot_was_set:
       - observations_questions:
-        - id: s_88
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
           source: suggest
     - slot_was_set:
       - collected_observations:
-        - id: s_2319
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
           state: present
           source: initial
     - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: a question from suggestions
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: a question from suggestions
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: absent
+          source: suggest
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: absent
+          source: suggest
+        - id: s_2100
+          state: present
+          source: suggest
+    - intent: dont_know
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: absent
+          source: suggest
+        - id: s_2100
+          state: present
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: absent
+          source: suggest
+        - id: s_2100
+          state: present
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+        - id: id
+          state: present
+          source: null
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: absent
+          source: suggest
+        - id: s_2100
+          state: present
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+        - id: id
+          state: present
+          source: null
+        - id: id
+          state: present
+          source: null
+    - intent: dont_know
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: absent
+          source: suggest
+        - id: s_2100
+          state: present
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+        - id: id
+          state: present
+          source: null
+        - id: id
+          state: present
+          source: null
+        - id: id
+          state: unknown
+          source: null
+    - intent: goodbye
+    - action: utter_goodbye
 
-  - story: interactive_story
+  - story: specified only age before action_setup_interview
     steps:
+    - intent: greet
+    - action: utter_greet_back
     - intent: observations_report
       entities:
       - age: '31'
@@ -93,7 +334,7 @@ stories:
       - age: '31'
     - action: action_setup_interview
     - slot_was_set:
-      - last_observations_report_msg: 'my age is 31. my observations are: sore throat and headache'
+      - last_observations_report_msg: عمري 31 عاما, واعاني من وجع بطن شديد
     - intent: sex_report
       entities:
       - sex: female
@@ -102,21 +343,594 @@ stories:
     - action: action_setup_interview
     - slot_was_set:
       - observations_questions:
-        - id: s_88
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
           source: suggest
     - slot_was_set:
       - collected_observations:
-        - id: s_20
+        - id: s_100
           state: present
           source: initial
-        - id: s_21
+        - id: s_102
           state: present
           source: initial
     - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: a question from suggestions
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: a question from suggestions
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: present
+          source: suggest
+    - intent: goodbye
+    - action: utter_goodbye
 
-  - story: interactive_story
+  - story: didn't specify sex and age before action_setup_interview
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+    - intent: observations_report
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: اصابني امبارحه سعال وقحه شديدان جدا
+    - intent: sex_report
+      entities:
+      - sex: male
+    - slot_was_set:
+      - sex: male
+    - action: action_setup_interview
+    - intent: age_report
+      entities:
+      - age: '50'
+    - slot_was_set:
+      - age: '50'
+    - action: action_setup_interview
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: a question from suggestions
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: a question from suggestions
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+    - intent: dont_know
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+        - id: id
+          state: present
+          source: null
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+        - id: id
+          state: present
+          source: null
+        - id: id
+          state: present
+          source: null
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+        - id: id
+          state: present
+          source: null
+        - id: id
+          state: present
+          source: null
+        - id: id
+          state: absent
+          source: null
+    - intent: dont_know
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: a question from suggestions
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+        - id: id
+          state: present
+          source: null
+        - id: id
+          state: present
+          source: null
+        - id: id
+          state: absent
+          source: null
+        - id: id
+          state: unknown
+          source: null
+    - intent: goodbye
+    - action: utter_goodbye
+
+  - story: re-sending the observations_report message because the previous message was too long
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+    - intent: observations_report
+    - action: action_setup_interview
+    - intent: observations_report
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: بطني يؤلمني بشده
+    - intent: sex_report
+      entities:
+      - sex: male
+    - slot_was_set:
+      - sex: male
+    - action: action_setup_interview
+    - intent: age_report
+      entities:
+      - age: '40'
+    - slot_was_set:
+      - age: '40'
+    - action: action_setup_interview
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+
+  - story: reporting an age that is too low
     steps:
     - intent: observations_report
+      entities:
+      - sex: male
+      - age: '3'
+    - slot_was_set:
+      - sex: male
+    - slot_was_set:
+      - age: '3'
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: طفلي عمره 3 سنوات ويعاني من الام بالمعده
+    - intent: age_report
+      entities:
+      - age: '13'
+    - slot_was_set:
+      - age: '13'
+    - action: action_setup_interview
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: question text
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+    - intent: dont_know
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: unknown
+          source: suggest
+        - id: id
+          state: present
+          source: null
+
+  - story: reporting an age that is too high
+    steps:
+    - intent: observations_report
+      entities:
+      - sex: male
+      - age: '140'
+    - slot_was_set:
+      - sex: male
+    - slot_was_set:
+      - age: '140'
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: والدي بعمر ال 140 ويشعر بحرقه شديده بمعدته
+    - intent: age_report
+      entities:
+      - age: '110'
+    - slot_was_set:
+      - age: '110'
+    - action: action_setup_interview
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+
+  - story: observations_report message with no observations
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+    - intent: observations_report
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: اعاني من امراض كثيره
+    - intent: age_report
       entities:
       - sex: male
       - age: '30'
@@ -125,8 +939,10 @@ stories:
     - slot_was_set:
       - age: '30'
     - action: action_setup_interview
+    - intent: observations_report
+    - action: action_setup_interview
     - slot_was_set:
-      - last_observations_report_msg: male of age 30. observations are fever, cough, and loss of taste
+      - last_observations_report_msg: اشعر بحمه, عطش شديد, سعال, وحراره عاليه
     - slot_was_set:
       - observations_questions:
         - id: s_81
@@ -135,25 +951,12 @@ stories:
           source: suggest
         - id: s_1142
           source: suggest
-        - id: s_21
-          source: suggest
-        - id: s_88
-          source: suggest
-        - id: s_107
-          source: suggest
-        - id: s_284
-          source: suggest
-        - id: s_20
-          source: suggest
     - slot_was_set:
       - collected_observations:
-        - id: s_98
+        - id: s_100
           state: present
           source: initial
         - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
           state: present
           source: initial
     - action: action_diagnose
@@ -161,30 +964,90 @@ stories:
       - observations_questions:
         - id: s_81
           source: suggest
-          text: Do you have the chills?
+          text: question text
         - id: s_2100
           source: suggest
         - id: s_1142
           source: suggest
-        - id: s_21
-          source: suggest
-        - id: s_88
-          source: suggest
-        - id: s_107
-          source: suggest
-        - id: s_284
-          source: suggest
-        - id: s_20
-          source: suggest
     - slot_was_set:
       - collected_observations:
-        - id: s_98
+        - id: s_100
           state: present
           source: initial
         - id: s_102
           state: present
           source: initial
-        - id: s_1096
+
+  - story: greet
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+
+  - story: goodbye
+    steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+  - story: restart after confirm
+    steps:
+    - intent: restart
+    - action: utter_confirm_restart
+    - intent: affirm
+    - action: action_restart
+
+  - story: don't restart after deny
+    steps:
+    - intent: restart
+    - action: utter_confirm_restart
+    - intent: deny
+
+  - story: restart during diagnosis, and then retreat from restart action
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+    - intent: observations_report
+    - action: action_setup_interview
+    - intent: age_report
+      entities:
+      - sex: male
+      - age: '22'
+    - slot_was_set:
+      - sex: male
+    - slot_was_set:
+      - age: '22'
+    - action: action_setup_interview
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
           state: present
           source: initial
     - intent: affirm
@@ -193,907 +1056,329 @@ stories:
       - observations_questions:
         - id: s_2100
           source: suggest
-          text: Do you feel sleepy, drowsy, tired, or weak, or do you lack energy for usual daily activities?
+          text: question text
         - id: s_1142
-          source: suggest
-        - id: s_21
-          source: suggest
-        - id: s_88
-          source: suggest
-        - id: s_107
-          source: suggest
-        - id: s_284
-          source: suggest
-        - id: s_20
           source: suggest
     - slot_was_set:
       - collected_observations:
-        - id: s_98
+        - id: s_100
           state: present
           source: initial
         - id: s_102
           state: present
           source: initial
-        - id: s_1096
-          state: present
-          source: initial
         - id: s_81
-          state: present
-          source: suggest
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_1142
-          source: suggest
-          text: Do your muscles ache or hurt?
-        - id: s_21
-          source: suggest
-        - id: s_88
-          source: suggest
-        - id: s_107
-          source: suggest
-        - id: s_284
-          source: suggest
-        - id: s_20
-          source: suggest
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_21
-          source: suggest
-          text: Do you have a headache?
-        - id: s_88
-          source: suggest
-        - id: s_107
-          source: suggest
-        - id: s_284
-          source: suggest
-        - id: s_20
-          source: suggest
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
           state: present
           source: suggest
     - intent: deny
     - action: action_diagnose
     - slot_was_set:
       - observations_questions:
-        - id: s_88
+        - id: s_1142
           source: suggest
-          text: Are you having trouble breathing, e.g., you can't catch your breath or breathe in enough air?
-        - id: s_107
-          source: suggest
-        - id: s_284
-          source: suggest
-        - id: s_20
-          source: suggest
+          text: question text
     - slot_was_set:
       - collected_observations:
-        - id: s_98
+        - id: s_100
           state: present
           source: initial
         - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
           state: present
           source: initial
         - id: s_81
           state: present
           source: suggest
         - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
           state: absent
           source: suggest
+    - intent: restart
+    - action: utter_confirm_restart
+    - intent: deny
+
+  - story: restart during diagnosis, and then confirm restart
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+    - intent: observations_report
+      entities:
+      - age: '40'
+      - sex: male
+    - slot_was_set:
+      - sex: male
+    - slot_was_set:
+      - age: '40'
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: عمري 40 سنه. ذكر. واعاني من سعال شديد جدا, ومشاكل بالرؤيه
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
     - intent: affirm
     - action: action_diagnose
     - slot_was_set:
       - observations_questions:
-        - id: s_107
+        - id: s_2100
           source: suggest
-          text: Do you have a runny nose?
-        - id: s_284
-          source: suggest
-        - id: s_20
+          text: question text
+        - id: s_1142
           source: suggest
     - slot_was_set:
       - collected_observations:
-        - id: s_98
+        - id: s_100
           state: present
           source: initial
         - id: s_102
           state: present
           source: initial
-        - id: s_1096
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
           state: present
           source: initial
         - id: s_81
           state: present
           source: suggest
         - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
           state: absent
           source: suggest
-        - id: s_88
+    - intent: restart
+    - action: utter_confirm_restart
+    - intent: affirm
+    - action: action_restart
+
+  - story: deviation from happy path during interview setup
+    steps:
+    - intent: observations_report
+      entities:
+      - sex: male
+    - slot_was_set:
+      - sex: male
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: دكتور انا راسي يؤلمني كثيرا. ذكر
+    - intent: nlu_fallback
+    - action: utter_fallback_message
+    - intent: age_report
+      entities:
+      - age: '30'
+    - slot_was_set:
+      - age: '30'
+    - action: action_setup_interview
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+
+  - story: deviation from happy path during diagnosis
+    steps:
+    - intent: observations_report
+      entities:
+      - age: '30'
+      - sex: male
+    - slot_was_set:
+      - sex: male
+    - slot_was_set:
+      - age: '30'
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: مرحبا. عمري 30 سنه. ذكر. اعاني من الام شديده جدا جدا بالمعده
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: question text
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+    - intent: nlu_fallback
+    - action: utter_fallback_message
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
           state: present
           source: suggest
     - intent: dont_know
     - action: action_diagnose
     - slot_was_set:
       - observations_questions:
-        - id: s_284
-          source: suggest
-          text: Have you been feeling less hungry lately?
-        - id: s_20
-          source: suggest
+        - id: id
+          text: question text
     - slot_was_set:
       - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-    - intent: deny
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_20
-          source: suggest
-          text: Do you have a sore throat?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: p_330
-          text: Are you not vaccinated against COVID-19?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_2389
-          text: Is your blood oxygen saturation lower than 80%?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-    - intent: dont_know
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_2389
-          text: Is your blood oxygen saturation lower than 80%?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-    - intent: dont_know
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_2368
-          text: Has the shortness of breath severely worsened in the past 24 hours?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_2205
-          text: Do you experience shortness of breath when performing daily activities, e.g., talking, getting dressed, or sitting?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-        - id: s_2368
-          state: present
-          source: null
-    - intent: deny
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_92
-          text: Has the shortness of breath started within the past hour?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-        - id: s_2368
-          state: present
-          source: null
-        - id: s_2205
-          state: absent
-          source: null
-    - intent: deny
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_100
-          text: Is your body temperature between 100.4 and 104°F or 38 and 40°C?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-        - id: s_2368
-          state: present
-          source: null
-        - id: s_2205
-          state: absent
-          source: null
-        - id: s_92
-          state: absent
-          source: null
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_2319
-          text: Has the fever lasted less than 3 days?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-        - id: s_2368
-          state: present
-          source: null
-        - id: s_2205
-          state: absent
-          source: null
-        - id: s_92
-          state: absent
-          source: null
         - id: s_100
           state: present
-          source: null
-    - intent: deny
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: p_300
-          text: Have you had physical contact with a person positive for COVID-19 in the past 14 days?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
           source: initial
         - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
           state: present
           source: initial
         - id: s_81
           state: present
           source: suggest
         - id: s_2100
-          state: present
+          state: absent
           source: suggest
         - id: s_1142
           state: present
           source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
+        - id: id
           state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-        - id: s_2368
-          state: present
-          source: null
-        - id: s_2205
-          state: absent
-          source: null
-        - id: s_92
-          state: absent
-          source: null
-        - id: s_100
-          state: present
-          source: null
-        - id: s_2319
-          state: absent
-          source: null
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_103
-          text: Has the cough lasted less than 3 weeks?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-        - id: s_2368
-          state: present
-          source: null
-        - id: s_2205
-          state: absent
-          source: null
-        - id: s_92
-          state: absent
-          source: null
-        - id: s_100
-          state: present
-          source: null
-        - id: s_2319
-          state: absent
-          source: null
-        - id: p_300
-          state: present
-          source: null
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions:
-        - id: s_105
-          text: Do you have a dry cough, i.e., without phlegm or mucus?
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-        - id: s_2368
-          state: present
-          source: null
-        - id: s_2205
-          state: absent
-          source: null
-        - id: s_92
-          state: absent
-          source: null
-        - id: s_100
-          state: present
-          source: null
-        - id: s_2319
-          state: absent
-          source: null
-        - id: p_300
-          state: present
-          source: null
-        - id: s_103
-          state: present
-          source: null
-    - intent: affirm
-    - action: action_diagnose
-    - slot_was_set:
-      - observations_questions: []
-    - slot_was_set:
-      - collected_observations:
-        - id: s_98
-          state: present
-          source: initial
-        - id: s_102
-          state: present
-          source: initial
-        - id: s_1096
-          state: present
-          source: initial
-        - id: s_81
-          state: present
-          source: suggest
-        - id: s_2100
-          state: present
-          source: suggest
-        - id: s_1142
-          state: present
-          source: suggest
-        - id: s_21
-          state: absent
-          source: suggest
-        - id: s_88
-          state: present
-          source: suggest
-        - id: s_107
-          state: unknown
-          source: suggest
-        - id: s_284
-          state: absent
-          source: suggest
-        - id: s_20
-          state: present
-          source: suggest
-        - id: p_330
-          state: present
-          source: null
-        - id: s_2389
-          state: unknown
-          source: null
-        - id: s_2368
-          state: present
-          source: null
-        - id: s_2205
-          state: absent
-          source: null
-        - id: s_92
-          state: absent
-          source: null
-        - id: s_100
-          state: present
-          source: null
-        - id: s_2319
-          state: absent
-          source: null
-        - id: p_300
-          state: present
-          source: null
-        - id: s_103
-          state: present
-          source: null
-        - id: s_105
-          state: present
           source: null
