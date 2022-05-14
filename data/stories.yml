@@ -978,6 +978,16 @@ stories:
           state: present
           source: initial
 
+  - story: greet
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+
+  - story: goodbye
+    steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
   - story: restart after confirm
     steps:
     - intent: restart
@@ -990,3 +1000,385 @@ stories:
     - intent: restart
     - action: utter_confirm_restart
     - intent: deny
+
+  - story: restart during diagnosis, and then retreat from restart action
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+    - intent: observations_report
+    - action: action_setup_interview
+    - intent: age_report
+      entities:
+      - sex: male
+      - age: '22'
+    - slot_was_set:
+      - sex: male
+    - slot_was_set:
+      - age: '22'
+    - action: action_setup_interview
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: question text
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+    - intent: restart
+    - action: utter_confirm_restart
+    - intent: deny
+
+  - story: restart during diagnosis, and then confirm restart
+    steps:
+    - intent: greet
+    - action: utter_greet_back
+    - intent: observations_report
+      entities:
+      - age: '40'
+      - sex: male
+    - slot_was_set:
+      - sex: male
+    - slot_was_set:
+      - age: '40'
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: عمري 40 سنه. ذكر. واعاني من سعال شديد جدا, ومشاكل بالرؤيه
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: question text
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+    - intent: restart
+    - action: utter_confirm_restart
+    - intent: affirm
+    - action: action_restart
+
+  - story: deviation from happy path during interview setup
+    steps:
+    - intent: observations_report
+      entities:
+      - sex: male
+    - slot_was_set:
+      - sex: male
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: دكتور انا راسي يؤلمني كثيرا. ذكر
+    - intent: nlu_fallback
+    - action: utter_fallback_message
+    - intent: age_report
+      entities:
+      - age: '30'
+    - slot_was_set:
+      - age: '30'
+    - action: action_setup_interview
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+
+  - story: deviation from happy path during diagnosis
+    steps:
+    - intent: observations_report
+      entities:
+      - age: '30'
+      - sex: male
+    - slot_was_set:
+      - sex: male
+    - slot_was_set:
+      - age: '30'
+    - action: action_setup_interview
+    - slot_was_set:
+      - last_observations_report_msg: مرحبا. عمري 30 سنه. ذكر. اعاني من الام شديده جدا جدا بالمعده
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_81
+          source: suggest
+          text: question text
+        - id: s_2100
+          source: suggest
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_2100
+          source: suggest
+          text: question text
+        - id: s_1142
+          source: suggest
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+    - intent: deny
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: s_1142
+          source: suggest
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+    - intent: nlu_fallback
+    - action: utter_fallback_message
+    - intent: affirm
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: present
+          source: suggest
+    - intent: dont_know
+    - action: action_diagnose
+    - slot_was_set:
+      - observations_questions:
+        - id: id
+          text: question text
+    - slot_was_set:
+      - collected_observations:
+        - id: s_100
+          state: present
+          source: initial
+        - id: s_102
+          state: present
+          source: initial
+        - id: s_81
+          state: present
+          source: suggest
+        - id: s_2100
+          state: absent
+          source: suggest
+        - id: s_1142
+          state: present
+          source: suggest
+        - id: id
+          state: unknown
+          source: null

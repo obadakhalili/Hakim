@@ -1,16 +1,6 @@
 version: "3.1"
 
 rules:
-  - rule: greet
-    steps:
-    - intent: greet
-    - action: utter_greet_back
-
-  - rule: goodbye
-    steps:
-    - intent: goodbye
-    - action: utter_goodbye
-  
   - rule: symptoms_inquiry out-of-scope
     steps:
     - intent: symptoms_inquiry

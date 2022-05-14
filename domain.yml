@@ -6,13 +6,14 @@ intents:
 - dont_know
 - goodbye
 - greet
+- nlu_fallback
 - observations_report
 - restart
 - sex_report
 - symptoms_inquiry
 entities:
-- age
 - sex
+- age
 slots:
   sex:
     type: text
@@ -46,6 +47,11 @@ slots:
 actions:
 - action_diagnose
 - action_setup_interview
+- utter_confirm_restart
+- utter_fallback_message
+- utter_goodbye
+- utter_greet_back
+- utter_symptoms_inquiry_out_of_scope
 responses:
   utter_confirm_restart:
   - text: utter_confirm_restart
