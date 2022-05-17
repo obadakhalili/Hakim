@@ -1,0 +1,12 @@
+version: "3.0"
+services:
+  rasa:
+    image: obadakhalili/hakim-bot
+    ports:
+      - 5005:5005
+    volumes:
+      - ./:/app
+  app:
+    image: ezzaldeeen/hakim-actions:v1
+    expose:
+      - 5055

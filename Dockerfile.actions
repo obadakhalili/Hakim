@@ -10,6 +10,3 @@ USER 1001
 COPY ./actions /app/actions
 COPY ./.env /app/.env
 COPY ./google_service_account_credentials.json /app/google_service_account_credentials.json
-
-ENTRYPOINT ["rasa"]
-CMD ["run", "actions"]

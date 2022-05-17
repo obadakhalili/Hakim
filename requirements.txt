@@ -1,4 +1,4 @@
--r actions/requirements-actions.txt
+-r ./actions/requirements-actions.txt
 
 rasa==3.1.0
-black==22.3.0
+transformers==4.19.0
