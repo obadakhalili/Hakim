@@ -10,4 +10,4 @@ RUN pip install -r requirements.txt
 RUN rasa train
 
 ENTRYPOINT ["rasa"]
-CMD ["run", "--model", "/app/models", "--enable-api", "--cors", "\"*\""]
+CMD ["run", "--model", "/app/models", "--endpoints", "/app/endpoints.prod.yml", "--enable-api", "--cors", "\"*\""]
