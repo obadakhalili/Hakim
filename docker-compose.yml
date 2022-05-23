@@ -1,0 +1,19 @@
+version: "3.0"
+
+services:
+  bot:
+    image: obadakhalili/hakim-bot
+    networks:
+      - rasa-network
+    ports:
+      - 5005:5005
+
+  actions-server:
+    image: ezzaldeeen/hakim-actions:v1
+    networks:
+      - rasa-network
+    expose:
+      - 5055
+
+networks:
+  rasa-network: {}

@@ -17,6 +17,7 @@ gtranslation_api = translate.TranslationServiceClient(
     )
 )
 
+
 class ActionSetupInterview(Action):
     def name(self):
         return "action_setup_interview"

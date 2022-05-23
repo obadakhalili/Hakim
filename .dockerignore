@@ -1,0 +1,9 @@
+.git
+.rasa
+.venv
+.vscode
+models
+results
+train_test_split
+graph.html
+story_graph.dot

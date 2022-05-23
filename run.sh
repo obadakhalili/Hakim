@@ -1,0 +1,1 @@
+rasa run --model /app/models --endpoints app/endpoints.prod.yml --enable-api --port $PORT --cors "*"

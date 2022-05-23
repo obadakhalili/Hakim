@@ -1,0 +1,15 @@
+FROM rasa/rasa:3.1.0
+
+USER root
+
+WORKDIR /app
+
+COPY . .
+
+RUN chmod +x run.sh
+
+RUN pip install -r requirements.txt
+RUN rasa train
+
+ENTRYPOINT []
+CMD ./run.sh
