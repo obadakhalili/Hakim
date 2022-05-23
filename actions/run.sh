@@ -1,0 +1,1 @@
+rasa run actions --cors "*" -p $PORT

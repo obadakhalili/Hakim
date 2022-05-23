@@ -1,12 +1,18 @@
-FROM rasa/rasa-sdk:3.1.0
+FROM rasa/rasa:3.1.0
 
 WORKDIR /app
 
-COPY actions/requirements-actions.txt ./
 USER root
+
+COPY actions/requirements-actions.txt ./
 RUN pip install -r requirements-actions.txt
-USER 1001
 
 COPY ./actions /app/actions
+
+RUN chmod +x /app/actions/rasa.sh
+
 COPY ./.env /app/.env
 COPY ./google_service_account_credentials.json /app/google_service_account_credentials.json
+
+ENTRYPOINT []
+CMD /app/actions/rasa.sh
