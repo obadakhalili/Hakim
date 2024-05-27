@@ -1,5 +1,10 @@
 # Hakim - An Arabic Healthcare Conversational Agent
 
+# Demo Pictures
+
+![hakim-demo-1](https://github.com/obadakhalili/Hakim/assets/54270856/28d94bb9-fe38-4604-b457-1c26a6fe23b1)
+![hakim-demo-2](https://github.com/obadakhalili/Hakim/assets/54270856/b49522d7-668a-4b2e-855c-34d939b45481)
+
 # Approach Research
 
 In our research, we found many approaches to building a conversational agent. All are categorizable into two main types:
